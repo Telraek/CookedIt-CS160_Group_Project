@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; // These allow us to modify the view of the page.
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
     
-    const [name, setName] = useState("before hw");
+    const [name, setName] = useState("before hw"); //a variable and function
+
     // This chunk modifies the state
     useEffect(() => {
         fetchData();
@@ -13,9 +14,9 @@ function App() {
       const fetchData = async () => {
        try{
         //call to Express 
-        const result = await fetch('http://localhost:3001/');
+        const result = await fetch('http://localhost:3001/'); //we wait for express to do something
         const resultOfResult = await result.text(); //to unpack promise
-        //replace .text with .json
+        //replace .text with .json later on
             if(result.ok){
                 console.log(resultOfResult); 
                 setName(resultOfResult); //changes state inside React
@@ -41,8 +42,7 @@ export default App;
 
 //Express mongoDB on separate server
 
-//React and Express separate ports
+//React and Express separate ports to make it work
 
-//iunstall cors to work with React in Express
+//install cors to work with React in Express
 
-//install hook
