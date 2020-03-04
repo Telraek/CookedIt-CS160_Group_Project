@@ -14,7 +14,7 @@ function App() {
       const fetchData = async () => {
        try{
         //call to Express 
-        const result = await fetch('http://localhost:3001/'); //we wait for express to do something
+        const result = await fetch('http://localhost:5000/'); //we wait for express to do something
         const resultOfResult = await result.text(); //to unpack promise
         //replace .text with .json later on
             if(result.ok){
