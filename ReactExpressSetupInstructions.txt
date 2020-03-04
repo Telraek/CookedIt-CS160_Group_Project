@@ -1,0 +1,30 @@
+This is assuming node.js has been installed and is working on your system.
+
+Installing React:
+Create a folder in designated location.
+	(In the case of the project, this folder is called 'CS160')
+In some terminal (can be Git Bash or VS Code), navigate to folder and run: npx create-react-app client
+	This will create a folder with all necessary React components inside a folder called client.
+
+Under client/src, .js files can be found. For now, modify App.js with test files App.js.
+Further information about code is within the App.js data.
+
+Installing Express:
+Create folder in designated location.
+	(In the case of the project, this folder is called express and is a separate directory than React installation.)
+In some terminal, navigate to the created folder and run npm init.
+Run two other commands:
+	npm install express --save (to install express modules)
+	npm install cors --save (to install cors modules required for working with React)
+Create a new .js file called index.js.
+Copy-paste hello world code into the index.js file.
+To run the .js script, type node index.js in the terminal within the express folder.
+Localhost 3001 should currently have a Hello World text output.
+
+* The React application, if running at this time, will switch states to Hello World if you refresh.
+* Cors is a security module designed to allow React and Express to talk to each other. It is required for them to interact over HTTP.
+* I recommend using VS Code to write and run code.
+
+Source for tutorials if you want to refer to them for more information.
+https://reactjs.org/tutorial/tutorial.html
+https://medium.com/@adnanrahic/hello-world-app-with-node-js-and-express-c1eb7cfa8a30
