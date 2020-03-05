@@ -1,0 +1,14 @@
+body {
+  background-color: #234;
+  color: #ddd;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+h1 {
+  font-size: 4em;
+}
+
+input[type=text], label {
+  margin-bottom: 8px;
+}
