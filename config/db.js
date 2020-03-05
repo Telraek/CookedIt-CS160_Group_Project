@@ -4,7 +4,7 @@ const config = require('config');
 const db = config.get('mongoURI');
 
 //Will return a promise. Use async/await to handle this.
-mongoose.connect(db);
+//mongoose.connect(db);
 
 const connectDB = async () => {
   try {
