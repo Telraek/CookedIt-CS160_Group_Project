@@ -1,48 +1,55 @@
 import React, { useEffect, useState } from 'react'; // These allow us to modify the view of the page.
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { render } from '@testing-library/react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
+
+import {Home} from './Home'
+import {SearchResult} from './SearchResult'
+import {PostPage} from './PostPage'
+import {FourOhFour} from './FourOhFour'
 function App() {
-    
-    const [name, setName] = useState("before hw"); //a variable and function
 
-    // This chunk modifies the state
-    useEffect(() => {
-        fetchData();
-      }, []);
+  const [name, setName] = useState("before hw"); //a variable and function
 
-      const fetchData = async () => {
-       try{
-        //call to Express 
-        const result = await fetch('http://localhost:5000/'); //we wait for express to do something
-        const resultOfResult = await result.text(); //to unpack promise
-        //replace .text with .json later on
-            if(result.ok){
-                console.log(resultOfResult); 
-                setName(resultOfResult); //changes state inside React
-                                        // This will change state based on values
-            }
-        }
+  // This chunk modifies the state
+  useEffect(() => {
+      fetchData();
+    }, []);
 
-       catch (e){
-        console.error(e);
-        }
-      };
+    const fetchData = async () => {
+     try{
+      //call to Express 
+      const result = await fetch('http://localhost:5000/'); //we wait for express to do something
+      const resultOfResult = await result.text(); //to unpack promise
+      //replace .text with .json later on
+          if(result.ok){
+              console.log(resultOfResult); 
+              setName(resultOfResult); //changes state inside React
+                                      // This will change state based on values
+          }
+      }
 
-//States get rendered on return
-//
+     catch (e){
+      console.error(e);
+      }
+    }
+
+
   return (
-    <div>{name}</div>
+    <React.Fragment>
+      <Router>
+        <Switch>
+          <Route exact path = "/" component={Home} />
+          <Route exact path = "/result" component={SearchResult} />
+          <Route exact path = "/post" component={PostPage} />
+          <Route component={FourOhFour} />
+        </Switch>
+      </Router>
+
+    </React.Fragment>
   );
 }
 
 export default App;
-
-//React on heroku
-
-//Express mongoDB on separate server
-
-//React and Express separate ports to make it work
-
-//install cors to work with React in Express
-
