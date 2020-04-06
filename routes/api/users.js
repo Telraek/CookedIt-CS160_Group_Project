@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 const { check, validationResult } = require('express-validator/check');
 
 const User = require('../../models/User');
@@ -13,14 +15,12 @@ const User = require('../../models/User');
 router.post(
   '/',
   [
-    check('name', 'Name is required!')
-      .not()
-      .isEmpty(),
+    check('name', 'Name is required!').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
       'Please enter a password with 8 or more characters'
-    ).isLength({ min: 6 })
+    ).isLength({ min: 6 }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -45,14 +45,14 @@ router.post(
       const avatar = gravatar.url(email, {
         s: '200',
         r: 'pg',
-        d: 'mm'
+        d: 'mm',
       });
 
       user = new User({
         name,
         email,
         avatar,
-        password
+        password,
       });
 
       //Encrypt the password
@@ -62,9 +62,25 @@ router.post(
       //Adds user to the database and returns a promise.
       await user.save();
 
-      //Return jsonwebtoken
+      //Return jsonwebtoken (contains userID payload)
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
 
-      res.send('User registered.');
+      //Change expiresIn to 3600 before deployment
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        { expiresIn: 360000 },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
+
+      //res.send('User registered.');
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error.');
