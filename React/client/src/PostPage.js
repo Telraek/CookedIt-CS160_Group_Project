@@ -75,9 +75,7 @@ export const PostPage= () => {
     const renderIngredients = (IngArr) =>
     {
         return IngArr.map((item,index)=>
-        <divBlock>
             <div>{item}</div>
-        </divBlock>
         )
 
     }
