@@ -4,18 +4,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import history from "./history"
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+
+
 //From Formik "Reducing Boilerplate" portion of overview with slight modifications
 const LogInPage = () => {
 
+
+    //can move into validation step later, currently a function for ease of structure
     const LoginSuccess = () =>{
             history.push("/profile")
             history.go(0)
     }
 
-    
-    
-    
     
     
     return(
