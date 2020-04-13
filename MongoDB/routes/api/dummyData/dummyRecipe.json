@@ -1,0 +1,42 @@
+{
+    "_id" : 1,
+    "properties": {
+        "name" : "apply chicken soup",
+        "difficulty" : "beginner",
+        "duration" : "60 min",
+        "avg_stars" : 4.5,
+        "stars_count" : 542,
+        "tags" : ["Japanese", "umami", "savory", "dinner"]
+    },
+
+
+    "recipe": {
+    "ingredients" : { 
+
+        "ingredient_list" : [ 
+            "apple", 
+            "chicken broth", 
+            "salt" 
+   ],
+
+        "ingredient_measurements" : { 
+            "apple" : "1", 
+            "salt" : "1 tablespoon",
+            "chicken broth" : "1 cup" 
+        } 
+    },
+
+
+    "appliances" : [
+        "takoyaki mold",
+        "oven"
+    ],
+    
+    "instructions" : [
+        "Step 1 is to finely chop the apples.", 
+        "Step 2 is to turn on the stove to medium heat."
+    ]
+    
+    },
+"delete_flag": false
+}
