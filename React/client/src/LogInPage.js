@@ -9,14 +9,25 @@ import history from "./history"
 //From Formik "Reducing Boilerplate" portion of overview with slight modifications
 const LogInPage = () => {
 
+    const [validation, setValidation] = useState(false); 
 
     //can move into validation step later, currently a function for ease of structure
     const LoginSuccess = () =>{
+        if(validation){
             history.push("/profile")
             history.go(0)
+        }
     }
 
     
+    const postRequest = async (json) => {
+    return (
+        fetch('http://localhost:5000/api/auth'),{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(json)
+        })
+    }
     
     return(
     <Container>
@@ -40,7 +51,9 @@ const LogInPage = () => {
             }}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
+                    postRequest(JSON.stringify(values, null, 2))
+                    //If we get a correct response, set validation to true
+                    setValidation(true)
                     LoginSuccess()
                     setSubmitting(false);
                   }, 400);
