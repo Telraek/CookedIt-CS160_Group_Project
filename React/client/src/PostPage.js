@@ -9,20 +9,42 @@ export const PostPage= () => {
         //a [variable, function] pair for various JSON data
 
     //Properties
-    const [name, setName] = useState("null"); 
-    const [difficulty, setDifficulty] = useState("null");
-    const [duration, setDuration] = useState("0");
-    const [stars, setStars] = useState("null");
+    const [id, setID] = useState("id"); 
+    const [name, setName] = useState("name"); 
+    const [difficulty, setDifficulty] = useState("difficulty");
+    const [duration, setDuration] = useState("duration");
+    const [stars, setStars] = useState("stars");
+    const [starCount, setStarCount] = useState(0);
     const [tags, setTags] = useState([]);
 
 
     //Recipe
     const [ingredientList, setIngredients] = useState([]);
-    const [ingredientMeasurement, setMeasurements] = useState([])
+    //const [ingredientMeasurement, setMeasurements] = useState([])
     const [appliances, setAppliances] = useState([])
     const [instructions, setInstructions] = useState([])
 
 
+    //These are hardcoded localhost routes meant to test GET requests for frontend while waiting on backend development
+    //Property Routes
+    var propString = 'http://localhost:5000/api/posts/properties';
+    var nameLoc = propString + '/name';
+    var difficultyLoc = propString + '/difficulty';
+    var durationLoc = propString + '/duration'
+    var starsLoc= propString + '/avg_stars'
+    var starCountLoc = propString + '/stars_count'
+    var tagsLoc = propString + '/tags'
+    
+    //Recipe Routes
+    var recipeString = 'http://localhost:5000/api/posts/recipe';
+    var ingrListLoc = recipeString + '/ingredients/ingredient_list';
+    //var ingrMeasurementLoc= recipeString + '/ingredients/ingredient_measurements';
+    var applianceLoc = recipeString + '/appliances'
+    var instructionsLoc= recipeString + '/instructions'
+
+
+
+    //Recipe Routes
 
     //we will call this whenever there is some change the the page, basically side effects occuring (e.g. rendering the page or updating data)
     useEffect(() => {
@@ -32,35 +54,40 @@ export const PostPage= () => {
     //we use an async function call to our backend
     const fetchData = async () => {
     try{
-        //call to Express 
-        var response = await fetch('http://localhost:5000/api/posts'); //fetch data from api route
-        const data =  await response.json(); //we have to wait for the promise to resolve before working with the data
-        //once we get a response and the promise is cleared, do stuff
-            if(response.ok){
-                setData(data)   
-            }
-        }
+        fetchDatum(nameLoc,setName)
+        fetchDatum(difficultyLoc,setDifficulty)
+        fetchDatum(durationLoc,setDuration)
+        fetchDatum(starsLoc,setStars)
+        fetchDatum(starCountLoc,setStarCount)
+        fetchDatum(tagsLoc,setTags)
 
+
+        fetchDatum(ingrListLoc,setIngredients)
+        //fetchDatum(ingrMeasurementLoc,setIngredients)
+        fetchDatum(applianceLoc,setAppliances)
+        fetchDatum(instructionsLoc,setInstructions)
+    }
     catch (e){
         console.error(e);
         }
-    };
+    };    
 
-    const setData =(data) =>{
-        console.log(data); //check our JSON
-        setName(data.properties.name)
-        setDifficulty(data.properties.difficulty)
-        setDuration(data.properties.duration)
-        setStars(data.properties.avg_stars)
-        setTags(data.properties.tags)
 
-        setIngredients(data.recipe.ingredients.ingredient_list)
-        setMeasurements(data.recipe.ingredients.ingredient_measurements)
-        setAppliances(data.recipe.appliances)
-        setInstructions(data.recipe.instructions)
-
+    //Pass in a backend REST API route and a setState function call
+    //Will grab any type of data from the backend and change state of variables
+    //Remember to keep state variables and json object types the same or else something will break
+    const fetchDatum = async (loc,func) =>{
+        var response = await fetch(loc)
+        const data =  await response.json();
+        if(response.ok){
+            console.log(data)
+            func(data)   
+        }
     }
 
+
+
+    //Will render out an array into a tag-like button
     const renderTags = (tagArr) =>
     {
         return tagArr.map((item,index)=>
@@ -72,7 +99,9 @@ export const PostPage= () => {
         )
     }
 
-    const renderIngredients = (IngArr) =>
+
+    //Will render out a generic List
+    const renderList = (IngArr) =>
     {
         return IngArr.map((item,index)=>
             <div>{item}</div>
@@ -99,12 +128,12 @@ export const PostPage= () => {
                 
                 <IngredientWrapper>
                     <b>Ingredient List</b>
-                    {renderIngredients(ingredientList)}
+                    {renderList(ingredientList)}
 
                     <b>Appliances</b>
-                    {renderIngredients(appliances)}
+                    {renderList(appliances)}
                     <b> Instructions </b>
-                    {renderIngredients(instructions)}
+                    {renderList(instructions)}
                 </IngredientWrapper>
 
                 <div>{renderTags(tags)}</div>
