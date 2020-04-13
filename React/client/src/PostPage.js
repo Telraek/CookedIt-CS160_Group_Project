@@ -113,25 +113,24 @@ export const PostPage= () => {
     //TODO: replace hardcoded tag array values with loop
     return (
         <React.Fragment>
-
             <Title>
                 Post Page
             </Title>
 
-
             <Wrapper>
                 <NameBlock><b>{name}</b></NameBlock>
-                <div>{difficulty}</div>
-                <div>{duration}</div>
-                <div>{stars} </div>
 
-                
                 <IngredientWrapper>
+                    <div><i>{difficulty}</i></div>
+                    <div><i>{duration}</i></div>
+                    <div><i>{stars} stars</i></div>
+                    <LineBreak></LineBreak>
                     <b>Ingredient List</b>
                     {renderList(ingredientList)}
-
+                    <LineBreak></LineBreak>
                     <b>Appliances</b>
                     {renderList(appliances)}
+                    <LineBreak></LineBreak>
                     <b> Instructions </b>
                     {renderList(instructions)}
                 </IngredientWrapper>
@@ -139,8 +138,6 @@ export const PostPage= () => {
                 <div>{renderTags(tags)}</div>
 
             </Wrapper>
-
-
 
 
         </React.Fragment>
@@ -156,17 +153,17 @@ export default PostPage;
 //Styled-component functions
 //fancy formatting and rendering with the power of CSS and HTML all wrapped into React 
 const TagButton = styled.button`
+font-family: Arial, Helvetica, sans-serif;
 font-size: 1em;
-margin: 1em;
-padding: 0.15em 0.1em
-border-radius: 1px;
-border: 1px solid red;
+margin: 0.5em;
+padding: 0.05em 0.01em
+border-radius: 4px;
+border: 5px solid #fcd0c7;
 color:red;
-background: transparent
 `;
 
 const NameBlock = styled.h2`
-    font-family: verdana;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 2em;
     text-align: center;
     padding: 0em;
@@ -177,7 +174,7 @@ const NameBlock = styled.h2`
 
 const Wrapper = styled.section`
     padding: 4em;
-    background: #f7cb79;
+    background: #fceec7;
 
 `;
 
@@ -188,8 +185,14 @@ const IngredientWrapper = styled.section`
 `
 
 const Title = styled.h1`
-
+font-family: Arial, Helvetica, sans-serif;
 font-size: 2em;
 text-align: center;
 color: orange;
+`
+const LineBreak = styled.hr`
+border:1;
+color:red;
+height: 5px;
+
 `
