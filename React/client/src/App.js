@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react'; // These allow us to modify 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-
+import Link from 'react-router-dom/Link'
+import Button from 'react-bootstrap/Button'
 
 import {Home} from './Home'
 import {SearchResult} from './SearchResult'
 import {PostPage} from './PostPage'
 import {FourOhFour} from './FourOhFour'
 import {Layout} from './StyledComponents/Layout'
+import LogInPage from './LogInPage';
 
 function App() {
 
-  const [name, setName] = useState("before hw"); //a variable and function
+
 
   // This chunk modifies the state
   useEffect(() => {
@@ -27,23 +29,39 @@ function App() {
       //replace .text with .json later on
           if(result.ok){
               console.log(resultOfResult); 
-              setName(resultOfResult); //changes state inside React
+              //setName(resultOfResult); //changes state inside React
                                       // This will change state based on values
           }
       }
-
      catch (e){
       console.error(e);
       }
     }
 
 
+
   return (
     <React.Fragment>
+
+
+
       <Layout>
         <Router>
+        <Link to = "/login">
+          <Button variant = "primary"> Login</Button>{''}
+        </Link>
+
+        <Link to = "/profile">
+          <Button variant = "primary"> Profile</Button>{''}
+        </Link>
+
+        <Link to = "/post">
+          <Button variant = "primary"> Post Example</Button>{''}
+        </Link>
+
           <Switch>
             <Route exact path = "/" component={Home} />
+            <Route exact path = "/login" component={LogInPage} />
             <Route exact path = "/result" component={SearchResult} />
             <Route exact path = "/post" component={PostPage} />
             <Route component={FourOhFour} />
