@@ -7,9 +7,7 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
-  website: {
-    type: String,
-  },
+  /*
   location: {
     tpye: String,
   },
@@ -18,15 +16,17 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  */
   //There favorite recipes to cook/learn about.
   recipes: {
     type: [String],
-    required: true,
+    //required: true,
   },
   bio: {
     type: String,
   },
-  //An object with all their social media links.
+  /*
+  An object with all their social media links.
   social: {
     twitter: {
       type: String,
@@ -38,6 +38,7 @@ const ProfileSchema = new mongoose.Schema({
       type: String,
     },
   },
+  */
   date: {
     type: Date,
     default: Date.now,
