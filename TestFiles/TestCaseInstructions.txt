@@ -1,0 +1,12 @@
+To run React App:
+Navigate to client inside terminal.
+type npm start.
+The webpage should display "Before HW".
+
+To run Express App:
+Navigate to express inside terminal
+Type node index.js.
+You should see "Hello World!" printed out inside the webpage.
+
+Navigate back to React.
+The webpage should also now display "Hello World!"
