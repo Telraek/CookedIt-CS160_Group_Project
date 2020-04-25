@@ -10,7 +10,6 @@ const cors = require('cors');
 
 // @route   GET api/profile/me (Just our profile based on User ID that is in the token.)
 // @desc    Get current users profile
-// @access  Private
 // @access  Private - getting user by token, meaning we have to bring in auth middleware.
 
 //The auth in the second parameter indicates that you want this to be a protected route.
