@@ -7,9 +7,11 @@ const { check, validationResult } = require('express-validator/check');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const cors = require('cors');
+
 // @route   GET api/profile/me (Just our profile based on User ID that is in the token.)
 // @desc    Get current users profile
 // @access  Private
+// @access  Private - getting user by token, meaning we have to bring in auth middleware.
 
 //The auth in the second parameter indicates that you want this to be a protected route.
 router.get('/me', auth, async (req, res) => {
@@ -42,11 +44,13 @@ router.post(
     auth,
     [
       // Makes sure that these fields have values since they are currently marked as required.
+      check('bio', 'Bio is required.').not().isEmpty(),
     ],
   ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
 
     // Pull all the fields from the reuqest body.
