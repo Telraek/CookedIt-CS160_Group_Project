@@ -8,7 +8,9 @@ const ProfileSchema = new mongoose.Schema({
     ref: 'user',
   },
   website: {
+  bio: {
     type: String,
+    required: true,
   },
   location: {
     tpye: String,
