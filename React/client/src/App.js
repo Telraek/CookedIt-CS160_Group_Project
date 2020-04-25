@@ -8,12 +8,12 @@ import Button from 'react-bootstrap/Button'
 import {Home} from './Home'
 import {SearchResult} from './SearchResult'
 import {PostPage} from './PostPage'
+import ProfilePage from './Profile'
 import {FourOhFour} from './FourOhFour'
 import {Layout} from './StyledComponents/Layout'
 import LogInPage from './LogInPage';
 
 function App() {
-
 
 
   // This chunk modifies the state
@@ -47,6 +47,12 @@ function App() {
 
       <Layout>
         <Router>
+
+        <Link to = "">
+          <Button variant = "primary"> Home</Button>{''}
+        </Link>
+
+
         <Link to = "/login">
           <Button variant = "primary"> Login</Button>{''}
         </Link>
@@ -62,6 +68,7 @@ function App() {
           <Switch>
             <Route exact path = "/" component={Home} />
             <Route exact path = "/login" component={LogInPage} />
+            <Route exact path = "/Profile" component={ProfilePage} />
             <Route exact path = "/result" component={SearchResult} />
             <Route exact path = "/post" component={PostPage} />
             <Route component={FourOhFour} />

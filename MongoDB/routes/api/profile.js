@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator/check');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
-
+const cors = require('cors');
 // @route   GET api/profile/me (Just our profile based on User ID that is in the token.)
 // @desc    Get current users profile
 // @access  Private

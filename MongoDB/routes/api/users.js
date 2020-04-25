@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator/check');
-
+const cors = require('cors');
 const User = require('../../models/User');
 
 // @route   POST api/users
@@ -15,7 +15,6 @@ const User = require('../../models/User');
 router.post(
   '/',
   [
-    check('name', 'Name is required!').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',

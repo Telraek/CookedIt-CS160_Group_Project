@@ -4,7 +4,7 @@ import './App.css';
 
 export const Home = () =>(
     <div>
-        hello Home
+        Home page
     </div>
 )
 

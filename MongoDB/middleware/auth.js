@@ -5,7 +5,7 @@ const config = require('config');
 //Next is a callback we have to run when we are done.
 module.exports = function (req, res, next) {
   //Get token from header
-  const token = req.header('x-auth-token');
+  const token = req.header('Authorization');
 
   //Check if no token
   if (!token) {

@@ -6,7 +6,7 @@ const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator/check');
-
+const cors = require('cors');
 //Bringing in the User model.
 const User = require('../../models/User');
 
