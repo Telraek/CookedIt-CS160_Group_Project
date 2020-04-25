@@ -27,21 +27,9 @@ export const PostPage= () => {
 
     //These are hardcoded localhost routes meant to test GET requests for frontend while waiting on backend development
     //Property Routes
-    var propString = 'http://localhost:5000/api/posts/properties';
-    var nameLoc = propString + '/name';
-    var difficultyLoc = propString + '/difficulty';
-    var durationLoc = propString + '/duration'
-    var starsLoc= propString + '/avg_stars'
-    var starCountLoc = propString + '/stars_count'
-    var tagsLoc = propString + '/tags'
     
     //Recipe Routes
-    var recipeString = 'http://localhost:5000/api/posts/recipe';
-    var ingrListLoc = recipeString + '/ingredients/ingredient_list';
-    //var ingrMeasurementLoc= recipeString + '/ingredients/ingredient_measurements';
-    var applianceLoc = recipeString + '/appliances'
-    var instructionsLoc= recipeString + '/instructions'
-
+    var postRoute = 'http://localhost:5000/api/posts/5e9f7eeaa361d697cbaf60aa';
 
 
     //Recipe Routes
@@ -54,18 +42,6 @@ export const PostPage= () => {
     //we use an async function call to our backend
     const fetchData = async () => {
     try{
-        fetchDatum(nameLoc,setName)
-        fetchDatum(difficultyLoc,setDifficulty)
-        fetchDatum(durationLoc,setDuration)
-        fetchDatum(starsLoc,setStars)
-        fetchDatum(starCountLoc,setStarCount)
-        fetchDatum(tagsLoc,setTags)
-
-
-        fetchDatum(ingrListLoc,setIngredients)
-        //fetchDatum(ingrMeasurementLoc,setIngredients)
-        fetchDatum(applianceLoc,setAppliances)
-        fetchDatum(instructionsLoc,setInstructions)
     }
     catch (e){
         console.error(e);

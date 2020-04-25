@@ -19,8 +19,11 @@ const LogInPage = () => {
     }
 
     
+    //Will verify email and password with backend Authentification API
     const postRequest = async (values) => {
         const location = 'http://localhost:5000/api/auth'
+
+        //JSON object to be sent to backend for verification
         const settings = {
             method: 'post',
             headers: {
@@ -28,15 +31,17 @@ const LogInPage = () => {
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify({
-                email: 'test.subject1@gmail.com',
-                password: '123456789'
+                email: values.email,
+                password: values.password
 
             })
         };
         try{
+
             let fetchResponse = await fetch(location,settings)
             let data = await fetchResponse.json()
-            //console.log(data)
+
+            //if we are verified, store auth token and redirect to profile page
             if(fetchResponse.status === 200)
             {
                 setValidation(true)
@@ -50,6 +55,10 @@ const LogInPage = () => {
             return e;
         }
     }
+
+
+    //modified Formik form
+    //Will ask for an email and a password with some specific formatting
     return(
     <Container>
         <div style={{display: 'flex', justifyContent: 'center'}}>Login Page</div>
@@ -72,6 +81,9 @@ const LogInPage = () => {
             }}
             onSubmit={(values, { setSubmitting }) => {
                 postRequest(values)
+                setTimeout(() => {
+                    setSubmitting(false);
+                  }, 400);
             }}//validation here. waiting for backend
             >
 
