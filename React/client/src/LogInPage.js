@@ -5,12 +5,14 @@ import Container from 'react-bootstrap/Container'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import history from "./history"
 import App from './App';
-
+import Button from 'react-bootstrap/Button'
 
 //From Formik "Reducing Boilerplate" portion of overview with slight modifications
 const LogInPage = () => {
 
-    const [validation, setValidation] = useState(false); 
+    const [validation, setValidation] = useState(false);
+
+    const [errors, setErrors] = useState()
     //can move into validation step later, currently a function for ease of structure
     const LoginSuccess = () =>{
             history.push("/profile")
@@ -40,14 +42,18 @@ const LogInPage = () => {
 
             let fetchResponse = await fetch(location,settings)
             let data = await fetchResponse.json()
-
+            console.log(data)
             //if we are verified, store auth token and redirect to profile page
             if(fetchResponse.status === 200)
             {
-                setValidation(true)
                 LoginSuccess()
                 localStorage.setItem("token", data.token) //not very security oriented, but simple
                 console.Log(localStorage.getItem("token"))
+
+            }
+            else if(fetchResponse.status === 400)
+            {
+                setErrors("Invalid Credentials")
             }
             return data;
 
@@ -80,10 +86,10 @@ const LogInPage = () => {
                 return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
+                setErrors("")
                 postRequest(values)
-                setTimeout(() => {
-                    setSubmitting(false);
-                  }, 400);
+                setSubmitting(false)
+
             }}//validation here. waiting for backend
             >
 
@@ -92,15 +98,16 @@ const LogInPage = () => {
                                                     //for form fillout
             <React.Fragment>
                 <Form>
+                <div>{errors}</div>
                 <Field type="email" name="email" />
                 <div></div>
                 <ErrorMessage name="email" component="div" />
                 <Field type="password" name="password" />
                 <div style={{display: 'flex', justifyContent: 'center'}}>
                 <ErrorMessage name="password" component="div" />
-                <button type="submit" disabled={isSubmitting}>
-                    Submit
-                </button>
+                <Button type="submit"variant = "dark" disabled={isSubmitting}>
+                    Log In
+                </Button>
                 </div>
                 </Form>
                 </React.Fragment>

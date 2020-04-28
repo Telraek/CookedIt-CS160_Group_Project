@@ -3,6 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import history from "./history"
+import Button from 'react-bootstrap/Button'
 
 export const Profile = () =>{
     const profilePath = 'http://localhost:5000/api/profile/me';
@@ -10,6 +11,8 @@ export const Profile = () =>{
     const [recipes, setRecipes] = useState()
     const [bio, setBio] = useState()
     const [location, setLocation] = useState()
+    const[validation, setValidation] = useState(false)
+
     useEffect(() => {
         fetchData();
       },[] );
@@ -29,6 +32,7 @@ export const Profile = () =>{
         console.log(data)
         if(response.ok){
             console.log(data)
+            setValidation(true)
             setupProfile(data)
         }
     }
@@ -42,13 +46,51 @@ export const Profile = () =>{
     const setData = (state, data) =>{
         state(data)
     }
+
+
+    const redirectToLogIn = () =>
+    {
+        history.push("/login")
+        history.go(0)
+
+    }
+
+    const redirectToSignUp = () =>
+    {
+        history.push("/signup")
+        history.go(0)
+
+    }
+    const profileView =
+        (
+            <React.Fragment>
+                <div>Recipes</div>
+                <div>{recipes}</div>
+                <p></p>
+                <div>{bio}</div>
+                <p></p>
+                <div>{location}</div>
+                <p></p>
+                <div>{name}</div>
+            </React.Fragment>
+        );
+
+    const logInView = 
+    (
+        <React.Fragment>
+        <div>Please Log In</div>
+        <Button variant = "link" onClick={redirectToLogIn}> Login</Button>
+        <Button variant = "link" onClick={redirectToSignUp}> Signup</Button>
+        </React.Fragment>
+    );
+
 return (
-<React.Fragment>
-<div>{recipes}</div>
-<div>{bio}</div>
-<div>{location}</div>
-<div>{name}</div>
-</React.Fragment>
+    <div>
+        {validation ? (profileView): //if we're validated, render page
+        (logInView)                 //otherwise, render a Please Log In Page
+        } 
+    </div>
+
 
 );
 

@@ -9,7 +9,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
-    "cypress": "^4.3.0",
+    "cypress": "^4.4.1",
     "formik": "^2.1.4",
     "history": "^4.10.1",
     "react": "^16.13.0",

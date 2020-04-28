@@ -9,8 +9,7 @@ export const PostPage= () => {
         //a [variable, function] pair for various JSON data
 
     //Properties
-    const [id, setID] = useState("id"); 
-    const [name, setName] = useState("name"); 
+    const [title, setTitle] = useState("Title"); 
     const [difficulty, setDifficulty] = useState("difficulty");
     const [duration, setDuration] = useState("duration");
     const [stars, setStars] = useState("stars");
@@ -40,27 +39,29 @@ export const PostPage= () => {
       },[] );
 
     //we use an async function call to our backend
-    const fetchData = async () => {
-    try{
-    }
-    catch (e){
-        console.error(e);
-        }
-    };    
+
 
 
     //Pass in a backend REST API route and a setState function call
     //Will grab any type of data from the backend and change state of variables
     //Remember to keep state variables and json object types the same or else something will break
-    const fetchDatum = async (loc,func) =>{
-        var response = await fetch(loc)
+    const fetchData = async () =>{
+        var response = await fetch(postRoute)
         const data =  await response.json();
         if(response.ok){
             console.log(data)
-            func(data)   
+            fillStates(data)
         }
+        return data;
     }
 
+
+    const fillStates = (data)=>{
+        setTitle(data.title)
+        setDifficulty(data.difficulty)
+
+        
+    }
 
 
     //Will render out an array into a tag-like button
@@ -94,7 +95,7 @@ export const PostPage= () => {
             </Title>
 
             <Wrapper>
-                <NameBlock><b>{name}</b></NameBlock>
+                <NameBlock><b>{title}</b></NameBlock>
 
                 <IngredientWrapper>
                     <div><i>{difficulty}</i></div>
