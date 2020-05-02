@@ -1,6 +1,6 @@
 # README
 
-Please be sure to install the latest version of Javascript before running any commands.
+Please be sure to install the latest version of Javascript and Node.js before running any commands.
 
 ### Installation
 Run 
