@@ -24,6 +24,7 @@ A simple sign-up page that requires you to enter any name, an email, and a passw
 Email must have a format
 ***name@something.com***
 and password must be at least 6 characters long.
+
 ***Extra note:*** Sign-up is currently bugged as a new user will not have an accompanying automatic profile creation.
 
 ### Profile Update
@@ -33,6 +34,7 @@ An authenticated user may update their biography and/or location with any valid 
 ### Create Post
 
 An authenticated user may update a post. A post requires both a title and some description with any valid text.
+
 ***Extra note:*** The textboxes are non-scaleable, 1 line boxes. This is due to project deadlines resulting in a simple implementation compared to managing a text-area in React.
 
 
